@@ -1,6 +1,6 @@
 #include "main.h"
 
-/
+/**
  *_calloc -allocated memoria for nmeb elemn de zise bytes
  *@nmemb: number of element in the array
  *@size: bytes for each position in the array
@@ -27,7 +27,7 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 
 }
 
-/
+/**
  *_puts - prints a string
  *@str: A to be printed
  *
@@ -44,12 +44,12 @@ void _puts(char *str)
   _putchar('\n');
 }
 
-/
+/**
  * search - gets the path to execute commands
  * @environ: Environment variable
  * Return: kalat_path (array of directories containing the command)
  *  or NULL on failure
- /
+ */
 char search(char **environ)
 {
   int position = 0;
@@ -65,13 +65,13 @@ char search(char **environ)
   return (kalat_path);
 }
 
-/
+/**
  * _itoa - converts an integer to ASCII
  * @num: number
  * @base: base
  * reference: geeksforgeeks
  * Return: character string
- /
+ */
 char *_itoa(int num, int base)
 {
   static char *digits = "0123456789abcdef";
@@ -99,7 +99,7 @@ char *_itoa(int num, int base)
   return (ptr);
 }
 
-/
+/**
  * str_concat - concatenate two strings
  * @s1: first string
  * @s2: second string

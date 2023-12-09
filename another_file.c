@@ -1,6 +1,6 @@
 #include "main.h"
 
-/
+/**
  * _strlen - returns a string
  * @s: integer to be used
  * Return: length of string
@@ -17,7 +17,7 @@ int _strlen(const char *s)
   return ((i + 1));
 }
 
-/
+/**
  * *_strcpy - copies a string pointed to by src to dest
  * @src: variale where string will be copied from
  * @dest: variable that string will be copied to
@@ -36,7 +36,7 @@ char *_strcpy(char *dest, char *src)
   return (dest);
 }
 
-/
+/**
  * _memcpy - copies bytes from src to dest
  *
  * @dest: memory to be transfereed to
@@ -57,7 +57,7 @@ char *_memcpy(char *dest, char *src, unsigned int n)
   return (dest);
 }
 
-/
+/**
  * _strdup - copies string and returns its pointer
  *
  * @str: string to be copied
