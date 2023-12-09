@@ -39,4 +39,3 @@ char **_which(char *fpath)
   }
   return (dirs);
 }
-
