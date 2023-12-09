@@ -14,6 +14,7 @@ extern char **environ;
 
 int _putchar(char c);
 void prints(char *str);
+void exit_handle(void);
 char *str_concat(char *s1, char *s2);
 char *_strcpy(char *dest, char *src);
 int _strlen(const char *s);
@@ -45,4 +46,3 @@ int *_error(char *argv, int count, char *args);
 void *_calloc(unsigned int nmemb, unsigned int size);
 
 #endif
-

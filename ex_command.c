@@ -1,4 +1,4 @@
-include "main.h"
+#include "main.h"
 /**
  *ex_command - is function that execute commands
  *@args: is our input form command line
@@ -8,7 +8,6 @@ void ex_command(char **args)
 {
   char *command = NULL;
   char *command_kan = NULL;
-  int status;
   if (args && args[0])
   {
     pid_t pid = fork();
