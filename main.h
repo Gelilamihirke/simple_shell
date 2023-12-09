@@ -1,23 +1,48 @@
 #ifndef MAIN_H
 #define MAIN_H
-#define MAX_INPUT_SIZE 256
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 #include <string.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <sys/wait.h>
-void getline_fun(int argc, char *argv[]);
-void token_fun(void);
-void ex_command(char **args);
+extern char **environ;
+
 int _putchar(char c);
-char *my_getline();
-char *path_barbadi(const char *command);
-void exit_handle(void);
-void display_prompt(void);
-char *my_strtok(char *str, const char *delimiters);
-size_t _strcspn(const char *jch, const char *bal);
-size_t _strspn(const char *jch, const char *gal);
+void prints(char *str);
+char *str_concat(char *s1, char *s2);
+char *_strcpy(char *dest, char *src);
+int _strlen(const char *s);
+int _strcmp(char *s1, char *s2);
+char *_strstr(char *str1, char *str2);
+char *_strdup(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+char *_itoa(int num, int base);
+int _atoi(char *a);
+/*essential functions */
+
+char **split_str(char *line, char **env);
+void prompt(void);
+char *read_input();
+void printenv(char **environ);
+void _puts(char *str);
+
+
+int execute_cmd(char **av, char **args, char **environ, int ymh, int kotari);
+char **search(char **environ);
+char **_which(char *fpath);
+
+
+void handle_signal(int signal);
+int _stat(char **cmd, char **menged);
+int *_error(char *argv, int count, char *args);
+
+
+void *_calloc(unsigned int nmemb, unsigned int size);
+
 #endif
 
