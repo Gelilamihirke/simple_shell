@@ -1,12 +1,4 @@
 #include "shell.h"
-
-/**
- **_strncpy - copies a string
- *@dest: the destination string to be copied to
- *@src: the source string
- *@n: the amount of characters to be copied
- *Return: the concatenated string
- */
 char *_strncpy(char *dest, char *src, int n)
 {
 	int i, j;
@@ -29,14 +21,6 @@ char *_strncpy(char *dest, char *src, int n)
 	}
 	return (s);
 }
-
-/**
- **_strncat - concatenates two strings
- *@dest: the first string
- *@src: the second string
- *@n: the amount of bytes to be maximally used
- *Return: the concatenated string
- */
 char *_strncat(char *dest, char *src, int n)
 {
 	int i, j;
@@ -56,13 +40,6 @@ char *_strncat(char *dest, char *src, int n)
 		dest[i] = '\0';
 	return (s);
 }
-
-/**
- **_strchr - locates a character in a string
- *@s: the string to be parsed
- *@c: the character to look for
- *Return: (s) a pointer to the memory area s
- */
 char *_strchr(char *s, char c)
 {
 	do {
@@ -82,14 +59,6 @@ char **get_environ(info_t *info)
 
 	return (info->environ);
 }
-
-/**
- * _unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: 1 on delete, 0 otherwise
- * @var: the string env var property
- */
 int _unsetenv(info_t *info, char *var)
 {
 	list_t *node = info->env;
@@ -114,16 +83,6 @@ int _unsetenv(info_t *info, char *var)
 	}
 	return (info->env_changed);
 }
-
-/**
- * _setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
- *  Return: Always 0
- */
 int _setenv(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
@@ -164,12 +123,6 @@ void clear_info(info_t *info)
 	info->path = NULL;
 	info->argc = 0;
 }
-
-/**
- * set_info - initializes info_t struct
- * @info: struct address
- * @av: argument vector
- */
 void set_info(info_t *info, char **av)
 {
 	int i = 0;
@@ -196,12 +149,6 @@ void set_info(info_t *info, char **av)
 		replace_vars(info);
 	}
 }
-
-/**
- * free_info - frees info_t struct fields
- * @info: struct address
- * @all: true if freeing all fields
- */
 void free_info(info_t *info, int all)
 {
 	ffree(info->argv);

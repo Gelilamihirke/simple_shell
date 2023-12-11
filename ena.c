@@ -1,24 +1,9 @@
 #include "shell.h"
-
-/**
- * _myenv - prints the current environment
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- * Return: Always 0
- */
 int _myenv(info_t *info)
 {
 	print_list_str(info->env);
 	return (0);
 }
-
-/**
- * _getenv - gets the value of an environ variable
- * @info: Structure containing potential arguments. Used to maintain
- * @name: env var name
- *
- * Return: the value
- */
 char *_getenv(info_t *info, const char *name)
 {
 	list_t *node = info->env;
@@ -33,14 +18,6 @@ char *_getenv(info_t *info, const char *name)
 	}
 	return (NULL);
 }
-
-/**
- * _mysetenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: Always 0
- */
 int _mysetenv(info_t *info)
 {
 	if (info->argc != 3)
@@ -52,13 +29,6 @@ int _mysetenv(info_t *info)
 		return (0);
 	return (1);
 }
-
-/**
- * _myunsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: Always 0
- */
 int _myunsetenv(info_t *info)
 {
 	int i;
@@ -73,13 +43,6 @@ int _myunsetenv(info_t *info)
 
 	return (0);
 }
-
-/**
- * populate_env_list - populates env linked list
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
- * Return: Always 0
- */
 int populate_env_list(info_t *info)
 {
 	list_t *node = NULL;
@@ -102,14 +65,6 @@ void _eputs(char *str)
 		i++;
 	}
 }
-
-/**
- * _eputchar - writes the character c to stderr
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
 int _eputchar(char c)
 {
 	static int i;
@@ -124,15 +79,6 @@ int _eputchar(char c)
 		buf[i++] = c;
 	return (1);
 }
-
-/**
- * _putfd - writes the character c to given fd
- * @c: The character to print
- * @fd: The filedescriptor to write to
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
 int _putfd(char c, int fd)
 {
 	static int i;
@@ -147,14 +93,6 @@ int _putfd(char c, int fd)
 		buf[i++] = c;
 	return (1);
 }
-
-/**
- *_putsfd - prints an input string
- * @str: the string to be printed
- * @fd: the filedescriptor to write to
- *
- * Return: the number of chars put
- */
 int _putsfd(char *str, int fd)
 {
 	int i = 0;
@@ -173,7 +111,7 @@ int _erratoi(char *s)
 	unsigned long int result = 0;
 
 	if (*s == '+')
-		s++;  /* TODO: why does this make main return 255? */
+		s++;
 	for (i = 0;  s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
@@ -188,14 +126,6 @@ int _erratoi(char *s)
 	}
 	return (result);
 }
-
-/**
- * print_error - prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
- * Return: 0 if no numbers in string, converted number otherwise
- *        -1 on error
- */
 void print_error(info_t *info, char *estr)
 {
 	_eputs(info->fname);
@@ -206,14 +136,6 @@ void print_error(info_t *info, char *estr)
 	_eputs(": ");
 	_eputs(estr);
 }
-
-/**
- * print_d - function prints a decimal (integer) number (base 10)
- * @input: the input
- * @fd: the filedescriptor to write to
- *
- * Return: number of characters printed
- */
 int print_d(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
@@ -245,15 +167,6 @@ int print_d(int input, int fd)
 
 	return (count);
 }
-
-/**
- * convert_number - converter function, a clone of itoa
- * @num: number
- * @base: base
- * @flags: argument flags
- *
- * Return: string
- */
 char *convert_number(long int num, int base, int flags)
 {
 	static char *array;
@@ -281,13 +194,6 @@ char *convert_number(long int num, int base, int flags)
 		*--ptr = sign;
 	return (ptr);
 }
-
-/**
- * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address of the string to modify
- *
- * Return: Always 0;
- */
 void remove_comments(char *buf)
 {
 	int i;

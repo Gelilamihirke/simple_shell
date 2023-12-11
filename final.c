@@ -1,12 +1,4 @@
 #include "shell.h"
-
-/**
- * _strcpy - copies a string
- * @dest: the destination
- * @src: the source
- *
- * Return: pointer to destination
- */
 char *_strcpy(char *dest, char *src)
 {
 	int i = 0;
@@ -21,13 +13,6 @@ char *_strcpy(char *dest, char *src)
 	dest[i] = 0;
 	return (dest);
 }
-
-/**
- * _strdup - duplicates a string
- * @str: the string to duplicate
- *
- * Return: pointer to the duplicated string
- */
 char *_strdup(const char *str)
 {
 	int length = 0;
@@ -44,13 +29,6 @@ char *_strdup(const char *str)
 		ret[length] = *--str;
 	return (ret);
 }
-
-/**
- *_puts - prints an input string
- *@str: the string to be printed
- *
- * Return: Nothing
- */
 void _puts(char *str)
 {
 	int i = 0;
@@ -63,14 +41,6 @@ void _puts(char *str)
 		i++;
 	}
 }
-
-/**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
- */
 int _putchar(char c)
 {
 	static int i;
@@ -126,13 +96,6 @@ char **strtow(char *str, char *d)
 	s[j] = NULL;
 	return (s);
 }
-
-/**
- * **strtow2 - splits a string into words
- * @str: the input string
- * @d: the delimeter
- * Return: a pointer to an array of strings, or NULL on failure
- */
 char **strtow2(char *str, char d)
 {
 	int i, j, k, m, numwords = 0;
@@ -197,17 +160,6 @@ int is_chain(info_t *info, char *buf, size_t *p)
 	*p = j;
 	return (1);
 }
-
-/**
- * check_chain - checks we should continue chaining based on last status
- * @info: the parameter struct
- * @buf: the char buffer
- * @p: address of current position in buf
- * @i: starting position in buf
- * @len: length of buf
- *
- * Return: Void
- */
 void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
@@ -231,13 +183,6 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 
 	*p = j;
 }
-
-/**
- * replace_alias - replaces an aliases in the tokenized string
- * @info: the parameter struct
- *
- * Return: 1 if replaced, 0 otherwise
- */
 int replace_alias(info_t *info)
 {
 	int i;
@@ -260,13 +205,6 @@ int replace_alias(info_t *info)
 	}
 	return (1);
 }
-
-/**
- * replace_vars - replaces vars in the tokenized string
- * @info: the parameter struct
- *
- * Return: 1 if replaced, 0 otherwise
- */
 int replace_vars(info_t *info)
 {
 	int i = 0;
@@ -301,14 +239,6 @@ int replace_vars(info_t *info)
 	}
 	return (0);
 }
-
-/**
- * replace_string - replaces string
- * @old: address of old string
- * @new: new string
- *
- * Return: 1 if replaced, 0 otherwise
- */
 int replace_string(char **old, char *new)
 {
 	free(*old);
