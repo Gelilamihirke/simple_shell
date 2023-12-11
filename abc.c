@@ -1,54 +1,95 @@
 #include "shell.h"
-
 char *_memset(char *s, char b, unsigned int n)
 {
 	unsigned int i;
-
 	for (i = 0; i < n; i++)
 		s[i] = b;
 	return (s);
 }
-
-
 void ffree(char **pp)
 {
 	char **a = pp;
-
 	if (!pp)
 		return;
 	while (*pp)
 		free(*pp++);
 	free(a);
 }
-
-
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	char *p;
-
 	if (!ptr)
 		return (malloc(new_size));
 	if (!new_size)
 		return (free(ptr), NULL);
 	if (new_size == old_size)
 		return (ptr);
-
 	p = malloc(new_size);
 	if (!p)
 		return (NULL);
-
+	old_size = old_size < new_size ? old_size : new_size;
+	while (old_size--)
+		p[old_size] = ((char *)ptr)[old_size];
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+{
+	char *p;
+	if (!ptr)
+		return (malloc(new_size));
+	if (!new_size)
+		return (free(ptr), NULL);
+	if (new_size == old_size)
+		return (ptr);
+	p = malloc(new_size);
+	if (!p)
+		return (NULL);
 	old_size = old_size < new_size ? old_size : new_size;
 	while (old_size--)
 		p[old_size] = ((char *)ptr)[old_size];
 	free(ptr);
 	return (p);
 }
+int hsh(info_t *info, char **av)
+{
+	ssize_t r = 0;
+	int builtin_ret = 0;
+
+	while (r != -1 && builtin_ret != -2)
+	{
+		clear_info(info);
+		if (interactive(info))
+			_puts("$ ");
+		_eputchar(BUF_FLUSH);
+		r = get_input(info);
+		if (r != -1)
+		{
+			set_info(info, av);
+			builtin_ret = find_builtin(info);
+			if (builtin_ret == -1)
+				find_cmd(info);
+		}
+		else if (interactive(info))
+			_putchar('\n');
+		free_info(info, 0);
+	}
+	write_history(info);
+	free_info(info, 1);
+	if (!interactive(info) && info->status)
+		exit(info->status);
+	if (builtin_ret == -2)
+	{
+		if (info->err_num == -1)
+			exit(info->status);
+		exit(info->err_num);
+	}
+	return (builtin_ret);
+}
+
+
 
 void find_cmd(info_t *info)
 {
 	char *path = NULL;
 	int i, k;
-
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
 	{
@@ -60,7 +101,6 @@ void find_cmd(info_t *info)
 			k++;
 	if (!k)
 		return;
-
 	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
 	if (path)
 	{
@@ -79,11 +119,9 @@ void find_cmd(info_t *info)
 		}
 	}
 }
-
 void fork_cmd(info_t *info)
 {
 	pid_t child_pid;
-
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -114,15 +152,12 @@ void fork_cmd(info_t *info)
 int _strlen(char *s)
 {
 	int i = 0;
-
 	if (!s)
 		return (0);
-
 	while (*s++)
 		i++;
 	return (i);
 }
-
 int _strcmp(char *s1, char *s2)
 {
 	while (*s1 && *s2)
@@ -137,8 +172,6 @@ int _strcmp(char *s1, char *s2)
 	else
 		return (*s1 < *s2 ? -1 : 1);
 }
-
-
 char *starts_with(const char *haystack, const char *needle)
 {
 	while (*needle)
@@ -149,7 +182,6 @@ char *starts_with(const char *haystack, const char *needle)
 char *_strcat(char *dest, char *src)
 {
 	char *ret = dest;
-
 	while (*dest)
 		dest++;
 	while (*src)
