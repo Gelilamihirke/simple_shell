@@ -14,7 +14,7 @@ size_t list_len(const list_t *yero)
 char **list_to_strings(list_t *mata)
 {
 	list_t *neteb = mata;
-	size_t j = list_len(mata), j;
+	size_t j = list_len(mata), i;
 	char **sera;
 	char *were;
 
