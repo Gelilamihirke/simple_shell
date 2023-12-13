@@ -24,7 +24,7 @@ char *_strncpy(char *fen, char *source, int lakk)
 char *_strncat(char *fen, char *source, int lakk)
 {
 	int i, j;
-	char *s = fen;
+	char *fafi = fen;
 
 	i = 0;
 	j = 0;
@@ -70,7 +70,7 @@ int _unsetenv(info_t *idea, char *mehal)
 
 	while (neteb)
 	{
-		gado = starts_with(node->were, var);
+		gado = starts_with(neteb->were, mehal);
 		if (gado && *gado == '=')
 		{
 			idea->env_changed = delete_node_at_index(&(idea->env), i);
@@ -83,7 +83,7 @@ int _unsetenv(info_t *idea, char *mehal)
 	}
 	return (idea->env_changed);
 }
-int _setenv(info_t *info, char *mehal, char *waga)
+int _setenv(info_t *idea, char *mehal, char *waga)
 {
 	char *ebab= NULL;
 	list_t *neteb;
@@ -128,7 +128,7 @@ void set_info(info_t *idea, char **mid)
 	int i = 0;
 
 	idea->fname = mid[0];
-	if (idea>arg)
+	if (idea->arg)
 	{
 		idea->argv = strtow(idea->arg, " \t");
 		if (!idea->argv)
@@ -138,7 +138,7 @@ void set_info(info_t *idea, char **mid)
 			if (idea->argv)
 			{
 				idea->argv[0] = _strdup(idea->arg);
-				idea>argv[1] = NULL;
+				idea->argv[1] = NULL;
 			}
 		}
 		for (i = 0; idea->argv && idea->argv[i]; i++)
@@ -160,7 +160,7 @@ void free_info(info_t *idea, int hulun)
 			free(idea->arg);
 		if (idea->env)
 			free_list(&(idea->env));
-		if (idea>history)
+		if (idea->history)
 			free_list(&(idea->history));
 		if (idea->alias)
 			free_list(&(idea->alias));
