@@ -37,7 +37,7 @@ int hsh(info_t *idea, char **mid)
 {
 	ssize_t rage = 0;
 	int inside = 0;
-	while (range != -1 && inside != -2)
+	while (rage != -1 && inside != -2)
 	{
 		clear_info(idea);
 		if (interactive(idea))
@@ -81,11 +81,11 @@ int find_builtin(info_t *idea)
 		{NULL, NULL}
 	};
 
-	for (j = 0; insidebl[j].type; j++)
-		if (_strcmp(idea->argv[0], insidebl[j].type) == 0)
+	for (j = 0; insideb1[j].type; j++)
+		if (_strcmp(idea->argv[0], insideb1[j].type) == 0)
 		{
 			idea->line_count++;
-			insidein = insidebl[j].func(idea);
+			insidein = insideb1[j].func(idea);
 			break;
 		}
 	return (insidein);
