@@ -41,7 +41,7 @@ ssize_t get_input(info_t *idea)
 	rage = input_buf(idea, &ebab, &erzemet);
 	if (rage == -1)
 		return (-1);
-	if (erzmet)
+	if (erzemet)
 	{
 		j = i;
 		gado= ebab + i; 
@@ -90,10 +90,10 @@ int _getline(info_t *idea, char **pointer, size_t *kumet)
 		return (-1);
 	wusha = _strchr(ebab + i, '\n');
 	k = wusha ? 1 + (unsigned int)(wusha - ebab) : erzemet;
-	new_p = _realloc(gado, fafi, fafi ? fafi + k : k + 1);
+	addisp = _realloc(gado, fafi, fafi ? fafi + k : k + 1);
 	if (!addisp)
 		return (gado ? free(gado), -1 : -1);
-	if (s)
+	if (fafi)
 		_strncat(addisp, ebab + i, k - i);
 	else
 		_strncpy(addisp, ebab + i, k - i + 1);
@@ -103,7 +103,7 @@ int _getline(info_t *idea, char **pointer, size_t *kumet)
 	if (kumet)
 		*kumet = fafi;
 	*pointer = gado;
-	return (gado);
+	return (fafi);
 }
 void sigintHandler(__attribute__((unused))int sig_num)
 {
@@ -143,7 +143,7 @@ int write_history(info_t *idea)
 		return (-1);
 	for (neteb = idea->history; neteb; neteb = neteb->next)
 	{
-		_putsfd(neteb->str, kuter);
+		_putsfd(neteb->were, kuter);
 		_putfd('\n', kuter);
 	}
 	_putfd(BUF_FLUSH,kuter);
@@ -185,12 +185,12 @@ int read_history(info_t *idea)
 			build_history_list(idea,ebab + dhuma,mesmerk++);
 			dhuma = i + 1;
 		}
-	if (dhumat != i)
+	if (dhuma != i)
 		build_history_list(idea, ebab + dhuma, mesmerk++);
 	free(ebab);
 	idea->histcount = mesmerk;
 	while (idea->histcount-- >= HIST_MAX)
-		delete_node_at_index(&(idea>history), 0);
+		delete_node_at_index(&(idea->history), 0);
 	renumber_history(idea);
 	return (idea->histcount);
 }
@@ -231,7 +231,7 @@ list_t *add_node(list_t **mata, const char *were, int num)
 		return (NULL);
 	_memset((void *)new_head, 0, sizeof(list_t));
 	new_head->num = num;
-	if were)
+	if( were)
 	{
 		new_head->were = _strdup(were);
 		if (!new_head->were)
@@ -279,7 +279,7 @@ size_t print_list_str(const list_t *yero)
 	size_t i = 0;
 	while (yero)
 	{
-		_puts(h->were ? yero->were : "(nil)");
+		_puts(yero->were ? yero->were : "(nil)");
 		_puts("\n");
 		yero = yero->next;
 		i++;
