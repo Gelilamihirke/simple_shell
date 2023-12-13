@@ -25,7 +25,7 @@ char **list_to_strings(list_t *mata)
 		return (NULL);
 	for (j = 0; neteb; neteb = neteb->next, j++)
 	{
-		were [j]= malloc(_strlen(neteb->were) + 1);
+		were = malloc(_strlen(neteb->were) + 1);
 		if (!were)
 		{
 			for (i = 0; i < j; i++)
