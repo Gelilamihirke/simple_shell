@@ -71,9 +71,9 @@ int find_builtin(info_t *idea)
 {
 	int j, insidein = -1;
 	builtin_table insideb1[] = {
-		{"exit", _myexit},
+		{"exitu", _myexit},
 		{"env", _myenv},
-		{"history", _myhistory},
+		{"history1", _myhistory},
 		{"setenv", _mysetenv},
 		{"unsetenv", _myunsetenv},
 		{"cd", _mycd},
