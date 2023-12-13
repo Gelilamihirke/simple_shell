@@ -1,76 +1,76 @@
 #include "shell.h"
-char *_memset(char *s, char b, unsigned int n)
+char *_memset(char *fafi, char fayo, unsigned int num)
 {
-	unsigned int i;
-	for (i = 0; i < n; i++)
-		s[i] = b;
-	return (s);
+	unsigned int j;
+	for (j = 0; j < num; j++)
+		fafi[j] = fayo;
+	return (fafi);
 }
-void ffree(char **pp)
+void ffree(char **pro)
 {
-	char **a = pp;
-	if (!pp)
+	char **game = pro;
+	if (!pro)
 		return;
-	while (*pp)
-		free(*pp++);
-	free(a);
+	while (*pro)
+		free(*pro++);
+	free(game);
 }
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *pointer, unsigned int prev_size, unsigned int curr_size)
 {
-	char *p;
-	if (!ptr)
-		return (malloc(new_size));
-	if (!new_size)
-		return (free(ptr), NULL);
-	if (new_size == old_size)
-		return (ptr);
-	p = malloc(new_size);
-	if (!p)
+	char *gado;
+	if (!pointer)
+		return (malloc(curr_size));
+	if (!curr_size)
+		return (free(pointer), NULL);
+	if (curr_size == prev_size)
+		return (gado);
+	gado = malloc(prev_size);
+	if (!gado)
 		return (NULL);
-	old_size = old_size < new_size ? old_size : new_size;
-	while (old_size--)
-		p[old_size] = ((char *)ptr)[old_size];
-	free(ptr);
-	return (p);
+	prev_size = prev_size < curr_size ? prev_size : curr_size;
+	while (prev_size--)
+		gado[prev_size] = ((char *)pointer)[prev_size];
+	free(pointer);
+	return (gado);
 }
-int hsh(info_t *info, char **av)
+int hsh(info_t *idea, char **mid)
 {
-	ssize_t r = 0;
-	int builtin_ret = 0;
-	while (r != -1 && builtin_ret != -2)
+	ssize_t rage = 0;
+	int inside = 0;
+	while (range != -1 && inside != -2)
 	{
-		clear_info(info);
-		if (interactive(info))
+		clear_info(idea);
+		if (interactive(idea))
 			_puts("$ ");
 		_eputchar(BUF_FLUSH);
-		r = get_input(info);
-		if (r != -1)
+		rage = get_input(idea);
+		if (rage != -1)
 		{
-			set_info(info, av);
-			builtin_ret = find_builtin(info);
-			if (builtin_ret == -1)
-				find_cmd(info);
+			set_info(idea, mid);
+			inside= find_builtin(idea);
+			if (inside == -1)
+				find_cmd(idea);
 		}
-		else if (interactive(info))
+		else if (interactive(idea))
 			_putchar('\n');
-		free_info(info, 0);
+		free_info(idea, 0);
 	}
-	write_history(info);
-	free_info(info, 1);
-	if (!interactive(info) && info->status)
-		exit(info->status);
-	if (builtin_ret == -2)
+	write_history(idea);
+	free_info(idea, 1);
+	if (!interactive(idea) && idea->status)
+		exit(idea->status);
+	if (inside == -2)
 	{
-		if (info->err_num == -1)
-			exit(info->status);
-		exit(info->err_num);
+		if (idea->err_num == -1)
+			exit(idea->status);
+		exit(idea->err_num);
 	}
-	return (builtin_ret);
+	return (inside);
 }
-int find_builtin(info_t *info)
+int find_builtin(info_t *idea)
 {
-	int i, built_in_ret = -1;
-	builtin_table builtintbl[] = {
+	int j, insidein = -1;
+	builtin_table insideb1[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
 		{"history", _myhistory},
@@ -81,65 +81,65 @@ int find_builtin(info_t *info)
 		{NULL, NULL}
 	};
 
-	for (i = 0; builtintbl[i].type; i++)
-		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+	for (j = 0; insidebl[j].type; j++)
+		if (_strcmp(idea->argv[0], insidebl[j].type) == 0)
 		{
-			info->line_count++;
-			built_in_ret = builtintbl[i].func(info);
+			idea->line_count++;
+			insidein = insidebl[j].func(idea);
 			break;
 		}
-	return (built_in_ret);
+	return (insidein);
 }
 
 
 
-void find_cmd(info_t *info)
+void find_cmd(info_t *idea)
 {
-	char *path = NULL;
-	int i, k;
-	info->path = info->argv[0];
-	if (info->linecount_flag == 1)
+	char *aktacha = NULL;
+	int j, l;
+	idea->aktacha = idea->argv[0];
+	if (idea->linecount_flag == 1)
 	{
-		info->line_count++;
-		info->linecount_flag = 0;
+		idea->line_count++;
+		idea->linecount_flag = 0;
 	}
-	for (i = 0, k = 0; info->arg[i]; i++)
-		if (!is_delim(info->arg[i], " \t\n"))
-			k++;
-	if (!k)
+	for (j = 0, l = 0; idea->arg[j]; j++)
+		if (!is_delim(idea->arg[j], " \t\n"))
+			l++;
+	if (!l)
 		return;
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
-	if (path)
+	aktacha= find_path(idea, _getenv(idea, "PATH="), idea->argv[0]);
+	if (aktacha)
 	{
-		info->path = path;
-		fork_cmd(info);
+		idea->aktacha = aktacha;
+		fork_cmd(idea);
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
-			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			fork_cmd(info);
-		else if (*(info->arg) != '\n')
+		if ((interactive(idea) || _getenv(idea, "PATH=")
+			|| idea->argv[0][0] == '/') && is_cmd(idea, idea->argv[0]))
+			fork_cmd(idea);
+		else if (*(idea->arg) != '\n')
 		{
-			info->status = 127;
-			print_error(info, "not found\n");
+			idea->status = 127;
+			print_error(idea, "not found\n");
 		}
 	}
 }
-void fork_cmd(info_t *info)
+void fork_cmd(info_t *idea)
 {
-	pid_t child_pid;
-	child_pid = fork();
-	if (child_pid == -1)
+	pid_t lej;
+	lej = fork();
+	if (lej== -1)
 	{
 		perror("Error:");
 		return;
 	}
-	if (child_pid == 0)
+	if (lej == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(idea->path, idea->argv, get_environ(idea)) == -1)
 		{
-			free_info(info, 1);
+			free_info(idea, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);
@@ -147,52 +147,52 @@ void fork_cmd(info_t *info)
 	}
 	else
 	{
-		wait(&(info->status));
-		if (WIFEXITED(info->status))
+		wait(&(idea->status));
+		if (WIFEXITED(idea->status))
 		{
-			info->status = WEXITSTATUS(info->status);
-			if (info->status == 126)
-				print_error(info, "Permission denied\n");
+			idea->status = WEXITSTATUS(idea->status);
+			if (idea->status == 126)
+				print_error(idea, "Permission denied\n");
 		}
 	}
 }
-int _strlen(char *s)
+int _strlen(char *fafi)
 {
-	int i = 0;
-	if (!s)
+	int j = 0;
+	if (!fafi)
 		return (0);
-	while (*s++)
-		i++;
-	return (i);
+	while (*fafi++)
+		j++;
+	return (j);
 }
-int _strcmp(char *s1, char *s2)
+int _strcmp(char *fafi1, char *fafi2)
 {
-	while (*s1 && *s2)
+	while (*fafi1 && *fafi2)
 	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
+		if (*fafi1 != *fafi2)
+			return (*fafi1 - *fafi2);
+		fafi1++;
+		fafi2++;
 	}
-	if (*s1 == *s2)
+	if (*fafi1 == *fafi2)
 		return (0);
 	else
-		return (*s1 < *s2 ? -1 : 1);
+		return (*fafi1 < *fafi2 ? -1 : 1);
 }
-char *starts_with(const char *haystack, const char *needle)
+char *starts_with(const char *guddaa, const char *melach)
 {
-	while (*needle)
-		if (*needle++ != *haystack++)
+	while (*melach)
+		if (*melach++ != *guddaa++)
 			return (NULL);
-	return ((char *)haystack);
+	return ((char *)guddaa);
 }
-char *_strcat(char *dest, char *src)
+char *_strcat(char *fen, char *source)
 {
-	char *ret = dest;
-	while (*dest)
-		dest++;
-	while (*src)
-		*dest++ = *src++;
-	*dest = *src;
-	return (ret);
+	char *meten = fen;
+	while (*fen)
+		fen++;
+	while (*source)
+		*fen++ = *source++;
+	*fen = *source;
+	return (meten);
 }
