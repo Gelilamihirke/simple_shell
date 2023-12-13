@@ -101,7 +101,7 @@ int _setenv(info_t *idea, char *mehal, char *waga)
 	idea = idea->env;
 	while (neteb)
 	{
-		gado = starts_with(neteb->were, var);
+		gado = starts_with(neteb->were, mehal);
 		if (gado && *gado == '=')
 		{
 			free(neteb->were);
