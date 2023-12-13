@@ -1,174 +1,174 @@
 #include "shell.h"
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpy(char *fen, char *source, int lakk)
 {
 	int i, j;
-	char *s = dest;
+	char *fafi = fen;
 
 	i = 0;
-	while (src[i] != '\0' && i < n - 1)
+	while (source[i] != '\0' && i < lakk- 1)
 	{
-		dest[i] = src[i];
+		fen[i] = source[i];
 		i++;
 	}
-	if (i < n)
+	if (i < lakk)
 	{
 		j = i;
-		while (j < n)
+		while (j < lakk)
 		{
-			dest[j] = '\0';
+			fen[j] = '\0';
 			j++;
 		}
 	}
-	return (s);
+	return (fafi);
 }
-char *_strncat(char *dest, char *src, int n)
+char *_strncat(char *fen, char *source, int lakk)
 {
 	int i, j;
-	char *s = dest;
+	char *s = fen;
 
 	i = 0;
 	j = 0;
-	while (dest[i] != '\0')
+	while (fen[i] != '\0')
 		i++;
-	while (src[j] != '\0' && j < n)
+	while (source[j] != '\0' && j < lakk)
 	{
-		dest[i] = src[j];
+		fen[i] = source[j];
 		i++;
 		j++;
 	}
-	if (j < n)
-		dest[i] = '\0';
-	return (s);
+	if (j < lakk)
+		fen[i] = '\0';
+	return (fafi);
 }
-char *_strchr(char *s, char c)
+char *_strchr(char *fafi, char wusha)
 {
 	do {
-		if (*s == c)
-			return (s);
-	} while (*s++ != '\0');
+		if (*fafi == wusha)
+			return (fafi);
+	} while (*fafi++ != '\0');
 
 	return (NULL);
 }
-char **get_environ(info_t *info)
+char **get_environ(info_t *idea)
 {
-	if (!info->environ || info->env_changed)
+	if (!idea->environ || idea->env_changed)
 	{
-		info->environ = list_to_strings(info->env);
-		info->env_changed = 0;
+		idea->environ = list_to_strings(idea->env);
+		idea->env_changed = 0;
 	}
 
-	return (info->environ);
+	return (idea->environ);
 }
-int _unsetenv(info_t *info, char *var)
+int _unsetenv(info_t *idea, char *mehal)
 {
-	list_t *node = info->env;
+	list_t *neteb = idea->env;
 	size_t i = 0;
-	char *p;
+	char *gado;
 
-	if (!node || !var)
+	if (!neteb || !mehal)
 		return (0);
 
-	while (node)
+	while (neteb)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		gado = starts_with(node->were, var);
+		if (gado && *gado == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
+			idea->env_changed = delete_node_at_index(&(idea->env), i);
 			i = 0;
-			node = info->env;
+			neteb = idea->env;
 			continue;
 		}
-		node = node->next;
+		neteb= neteb->next;
 		i++;
 	}
-	return (info->env_changed);
+	return (idea->env_changed);
 }
-int _setenv(info_t *info, char *var, char *value)
+int _setenv(info_t *info, char *mehal, char *waga)
 {
-	char *buf = NULL;
-	list_t *node;
-	char *p;
+	char *ebab= NULL;
+	list_t *neteb;
+	char *gado;
 
-	if (!var || !value)
+	if (!mehal || !waga)
 		return (0);
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
+	ebab= malloc(_strlen(mehal) + _strlen(waga) + 2);
+	if (!ebab)
 		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
-	node = info->env;
-	while (node)
+	_strcpy(ebab ,mehal);
+	_strcat(ebab, "=");
+	_strcat(ebab, waga);
+	idea = idea->env;
+	while (neteb)
 	{
-		p = starts_with(node->str, var);
-		if (p && *p == '=')
+		gado = starts_with(neteb->were, var);
+		if (gado && *gado == '=')
 		{
-			free(node->str);
-			node->str = buf;
-			info->env_changed = 1;
+			free(neteb->were);
+			neteb->were= ebab;
+			idea->env_changed = 1;
 			return (0);
 		}
-		node = node->next;
+		neteb= neteb->next;
 	}
-	add_node_end(&(info->env), buf, 0);
-	free(buf);
-	info->env_changed = 1;
+	add_node_end(&(idea->env),ebab, 0);
+	free(ebab);
+	idea->env_changed = 1;
 	return (0);
 }
-void clear_info(info_t *info)
+void clear_info(info_t *idea)
 {
-	info->arg = NULL;
-	info->argv = NULL;
-	info->path = NULL;
-	info->argc = 0;
+	idea->arg = NULL;
+	idea->argv = NULL;
+	idea->path = NULL;
+	idea->argc = 0;
 }
-void set_info(info_t *info, char **av)
+void set_info(info_t *idea, char **mid)
 {
 	int i = 0;
 
-	info->fname = av[0];
-	if (info->arg)
+	idea->fname = mid[0];
+	if (idea>arg)
 	{
-		info->argv = strtow(info->arg, " \t");
-		if (!info->argv)
+		idea->argv = strtow(idea->arg, " \t");
+		if (!idea->argv)
 		{
 
-			info->argv = malloc(sizeof(char *) * 2);
-			if (info->argv)
+			idea->argv = malloc(sizeof(char *) * 2);
+			if (idea->argv)
 			{
-				info->argv[0] = _strdup(info->arg);
-				info->argv[1] = NULL;
+				idea->argv[0] = _strdup(idea->arg);
+				idea>argv[1] = NULL;
 			}
 		}
-		for (i = 0; info->argv && info->argv[i]; i++)
+		for (i = 0; idea->argv && idea->argv[i]; i++)
 			;
-		info->argc = i;
+		idea->argc = i;
 
-		replace_alias(info);
-		replace_vars(info);
+		replace_alias(idea);
+		replace_vars(idea);
 	}
 }
-void free_info(info_t *info, int all)
+void free_info(info_t *idea, int hulun)
 {
-	ffree(info->argv);
-	info->argv = NULL;
-	info->path = NULL;
-	if (all)
+	ffree(idea->argv);
+	idea->argv = NULL;
+	idea->path = NULL;
+	if (hulun)
 	{
-		if (!info->cmd_buf)
-			free(info->arg);
-		if (info->env)
-			free_list(&(info->env));
-		if (info->history)
-			free_list(&(info->history));
-		if (info->alias)
-			free_list(&(info->alias));
-		ffree(info->environ);
-			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
-		if (info->readfd > 2)
-			close(info->readfd);
+		if (!idea->cmd_buf)
+			free(idea->arg);
+		if (idea->env)
+			free_list(&(idea->env));
+		if (idea>history)
+			free_list(&(idea->history));
+		if (idea->alias)
+			free_list(&(idea->alias));
+		ffree(idea->environ);
+			idea->environ = NULL;
+		bfree((void **)idea->cmd_buf);
+		if (idea->readfd > 2)
+			close(idea->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }
