@@ -95,9 +95,9 @@ int find_builtin(info_t *idea)
 
 void find_cmd(info_t *idea)
 {
-	char *aktacha = NULL;
+	char *path= NULL;
 	int j, l;
-	idea->aktacha = idea->argv[0];
+	idea->path = idea->argv[0];
 	if (idea->linecount_flag == 1)
 	{
 		idea->line_count++;
@@ -108,10 +108,10 @@ void find_cmd(info_t *idea)
 			l++;
 	if (!l)
 		return;
-	aktacha= find_path(idea, _getenv(idea, "PATH="), idea->argv[0]);
-	if (aktacha)
+path= find_path(idea, _getenv(idea, "PATH="), idea->argv[0]);
+	if (path)
 	{
-		idea->aktacha = aktacha;
+		idea->path = path;
 		fork_cmd(idea);
 	}
 	else
