@@ -130,7 +130,7 @@ void fork_cmd(info_t *idea)
 {
 	pid_t lej;
 	lej = fork();
-	if (lej== -1)
+	if (lej== 1)
 	{
 		perror("Error:");
 		return;
