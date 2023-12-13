@@ -29,7 +29,7 @@ char **list_to_strings(list_t *mata)
 		if (!were)
 		{
 			for (i = 0; i < j; i++)
-				free(strs[i]);
+				free(sera[i]);
 			free(sera);
 			return (NULL);
 		}
