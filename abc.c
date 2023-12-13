@@ -72,7 +72,7 @@ int find_builtin(info_t *idea)
 	int j, insidein = -1;
 	builtin_table insideb1[] = {
 		{"exitu", _myexit},
-		{"env", _myenv},
+		{"envu", _myenv},
 		{"history1", _myhistory},
 		{"setenv9", _mysetenv},
 		{"unsetenv8", _myunsetenv},
@@ -117,7 +117,7 @@ path= find_path(idea, _getenv(idea, "PATH="), idea->argv[0]);
 	else
 	{
 		if ((interactive(idea) || _getenv(idea, "PATH=")
-			|| idea->argv[0][0] == '/') && is_cmd(idea, idea->argv[0]))
+			|| idea->argv[0][1] == '/') && is_cmd(idea, idea->argv[0]))
 			fork_cmd(idea);
 		else if (*(idea->arg) != '\n')
 		{
