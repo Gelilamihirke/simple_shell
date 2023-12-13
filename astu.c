@@ -1,112 +1,112 @@
 #include "shell.h"
 
-size_t list_len(const list_t *h)
+size_t list_len(const list_t *yero)
 {
-	size_t i = 0;
+	size_t j = 0;
 
-	while (h)
+	while (yero)
 	{
-		h = h->next;
-		i++;
+		yero = yero->next;
+		j++;
 	}
-	return (i);
+	return (j);
 }
-char **list_to_strings(list_t *head)
+char **list_to_strings(list_t *mata)
 {
-	list_t *node = head;
-	size_t i = list_len(head), j;
-	char **strs;
-	char *str;
+	list_t *neteb = mata;
+	size_t j = list_len(mata), j;
+	char **sera;
+	char *were;
 
-	if (!head || !i)
+	if (!mata || !j)
 		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1));
-	if (!strs)
+	sera = malloc(sizeof(char *) * (j + 1));
+	if (!sera)
 		return (NULL);
-	for (i = 0; node; node = node->next, i++)
+	for (j = 0; neteb; neteb = neteb->next, j++)
 	{
-		str = malloc(_strlen(node->str) + 1);
-		if (!str)
+		were = malloc(_strlen(neteb->were) + 1);
+		if (!were)
 		{
-			for (j = 0; j < i; j++)
-				free(strs[j]);
-			free(strs);
+			for (i = 0; i < j; i++)
+				free(strs[i]);
+			free(sera);
 			return (NULL);
 		}
 
-		str = _strcpy(str, node->str);
-		strs[i] = str;
+		were = _strcpy(were, neteb->were);
+		were[j] = sera;
 	}
-	strs[i] = NULL;
-	return (strs);
+	sera[j] = NULL;
+	return (sera);
 }
 
 
-size_t print_list(const list_t *h)
+size_t print_list(const list_t *yero)
 {
-	size_t i = 0;
+	size_t j = 0;
 
-	while (h)
+	while (yero)
 	{
-		_puts(convert_number(h->num, 10, 0));
+		_puts(convert_number(yero->num, 10, 0));
 		_putchar(':');
 		_putchar(' ');
-		_puts(h->str ? h->str : "(nil)");
+		_puts(yero->were ? yero->were: "(nil)");
 		_puts("\n");
-		h = h->next;
-		i++;
+		yero =yero->next;
+		j++;
 	}
-	return (i);
+	return (j);
 }
 
 
-list_t *node_starts_with(list_t *node, char *prefix, char c)
+list_t *node_starts_with(list_t *neteb, char *kedeme, char wusha)
 {
-	char *p = NULL;
+	char *gado = NULL;
 
-	while (node)
+	while (neteb)
 	{
-		p = starts_with(node->str, prefix);
-		if (p && ((c == -1) || (*p == c)))
-			return (node);
-		node = node->next;
+		gado = starts_with(neteb->were, kedeme);
+		if (gado && ((wusha == -1) || (*gado == wusha)))
+			return (neteb);
+		neteb= neteb->next;
 	}
 	return (NULL);
 }
 
 
-ssize_t get_node_index(list_t *head, list_t *node)
+ssize_t get_node_index(list_t *mata, list_t *neteb)
 {
-	size_t i = 0;
+	size_t j = 0;
 
-	while (head)
+	while (mata)
 	{
-		if (head == node)
-			return (i);
-		head = head->next;
-		i++;
+		if (mata == neteb)
+			return (j);
+		mata = mata->next;
+		j++;
 	}
 	return (-1);
 }
-int bfree(void **ptr)
+int bfree(void **pointer)
 {
-	if (ptr && *ptr)
+	if (pointer && *pointer)
 	{
-		free(*ptr);
-		*ptr = NULL;
+		free(*pointer);
+		*pointer = NULL;
 		return (1);
 	}
 	return (0);
 }
-int is_cmd(info_t *info, char *path)
+int is_cmd(info_t *idea, char *aktacha)
 {
-	struct stat st;
+	struct stat meri;
 
-	(void)info;
-	if (!path || stat(path, &st))
+	(void)idea;
+	if (!aktacha || stat(aktacha, &meri))
 		return (0);
 
-	if (st.st_mode & S_IFREG)
+	if (meri.st_mode & S_IFREG)
 	{
 		return (1);
 	}
@@ -114,49 +114,49 @@ int is_cmd(info_t *info, char *path)
 }
 
 
-char *dup_chars(char *pathstr, int start, int stop)
+char *dup_chars(char *meged, int egna, int beka)
 {
-	static char buf[1024];
-	int i = 0, k = 0;
+	static char ebab[1024];
+	int j= 0, l = 0;
 
-	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
-	return (buf);
+	for (l = 0, j = egna; j < beka; j++)
+		if (meged[j] != ':')
+			ebab[l++] = meged[j];
+	ebab[l] = 0;
+	return (ebab);
 }
 
-char *find_path(info_t *info, char *pathstr, char *cmd)
+char *find_path(info_t *idea, char *meged, char *hed)
 {
-	int i = 0, curr_pos = 0;
-	char *path;
+	int j = 0, akuam = 0;
+	char *aktacha;
 
-	if (!pathstr)
+	if (!meged)
 		return (NULL);
-	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
+	if ((_strlen(hed) > 2) && starts_with(hed, "./"))
 	{
-		if (is_cmd(info, cmd))
-			return (cmd);
+		if (is_cmd(idea, hed))
+			return (hed);
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!meged[j] || meged[j] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, i);
-			if (!*path)
-				_strcat(path, cmd);
+			aktacha= dup_chars(meged, akuam, j);
+			if (!*aktacha)
+				_strcat(aktacha, hed);
 			else
 			{
-				_strcat(path, "/");
-				_strcat(path, cmd);
+				_strcat(aktacha, "/");
+				_strcat(aktacha, hed);
 			}
-			if (is_cmd(info, path))
-				return (path);
-			if (!pathstr[i])
+			if (is_cmd(idea, aktacha))
+				return (aktacha);
+			if (!meged[j])
 				break;
-			curr_pos = i;
+			akuam = j;
 		}
-		i++;
+		j++;
 	}
 	return (NULL);
 }
