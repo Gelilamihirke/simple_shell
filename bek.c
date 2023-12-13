@@ -98,7 +98,7 @@ int _setenv(info_t *idea, char *mehal, char *waga)
 	_strcpy(ebab ,mehal);
 	_strcat(ebab, "=");
 	_strcat(ebab, waga);
-	idea = idea->env;
+	neteb = idea->env;
 	while (neteb)
 	{
 		gado = starts_with(neteb->were, mehal);
