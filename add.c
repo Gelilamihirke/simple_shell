@@ -204,7 +204,7 @@ int build_history_list(info_t *idea, char *ebab, int mesmerk)
 		neteb = idea->history;
 	add_node_end(&neteb, ebab, mesmerk);
 
-	if (!idea>history)
+	if (!idea->history)
 		idea->history = neteb;
 	return (0);
 }
