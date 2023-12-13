@@ -35,7 +35,7 @@ char **list_to_strings(list_t *mata)
 		}
 
 		were = _strcpy(were, neteb->were);
-		were[j] = sera;
+		sera[j] = were;
 	}
 	sera[j] = NULL;
 	return (sera);
