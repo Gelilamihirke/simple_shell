@@ -37,7 +37,7 @@ extern char **environ;
 typedef struct liststr
 {
 	int num;
-	char *str;
+	char *were;
 	struct liststr *next;
 } list_t;
 
@@ -92,7 +92,7 @@ int loophsh(char **);
 void _eputs(char *);
 int _eputchar(char);
 int _putfd(char c, int fd);
-int _putsfd(char *str, int fd);
+int _putsfd(char *were, int fd);
 
 
 int _strlen(char *);
