@@ -74,10 +74,10 @@ int find_builtin(info_t *idea)
 		{"exitu", _myexit},
 		{"env", _myenv},
 		{"history1", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
+		{"setenv9", _mysetenv},
+		{"unsetenv8", _myunsetenv},
+		{"cd3", _mycd},
+		{"alias8", _myalias},
 		{NULL, NULL}
 	};
 
