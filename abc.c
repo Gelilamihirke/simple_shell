@@ -24,7 +24,7 @@ void *_realloc(void *pointer, unsigned int prev_size, unsigned int curr_size)
 		return (free(pointer), NULL);
 	if (curr_size == prev_size)
 		return (gado);
-	gado = malloc(prev_size);
+	gado = malloc(curr_size);
 	if (!gado)
 		return (NULL);
 	prev_size = prev_size < curr_size ? prev_size : curr_size;
