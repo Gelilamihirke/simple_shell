@@ -128,7 +128,7 @@ int unset_alias(info_t *info, char *were)
 int set_alias(info_t *info, char *were)
 {
 	char *p;
-	p = _strchr(str, '=');
+	p = _strchr(were, '=');
 	if (!p)
 		return (1);
 	if (!*++p)
