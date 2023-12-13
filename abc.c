@@ -23,7 +23,7 @@ void *_realloc(void *pointer, unsigned int prev_size, unsigned int curr_size)
 	if (!curr_size)
 		return (free(pointer), NULL);
 	if (curr_size == prev_size)
-		return (gado);
+		return (pointer);
 	gado = malloc(curr_size);
 	if (!gado)
 		return (NULL);
